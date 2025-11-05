@@ -20,7 +20,7 @@ from common_data import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("studnt/", include("student.urls")),
+    path("student/", include("student.urls")),
     path("teacher/", include("teacher.urls")),
     path("login/", views.login_handler, name='login'),
     path("register/", views.register_handler),

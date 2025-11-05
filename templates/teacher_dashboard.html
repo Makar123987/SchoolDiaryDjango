@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Teacher Dashboard</title>
+</head>
+<body>
+  <h1>Teacher Dashboard</h1>
+  <h2>All Lessons:</h2>
+  <p><a href="{% url 'lessons' %}">All lessons</a></p>
+
+  <h2>Lessons:</h2>
+  <ul>
+    {% for lesson in lessons %}
+      <li>
+        <a href="{% url 'lesson_details' lesson_id=lesson.id %}">
+          {{ lesson.date }} — {{ lesson.name }} ({{ lesson.sclass.class_name }})
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Classes</h2>
+  <ul>
+    {% for class in classes %}
+      <li>{{ class.class_name }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

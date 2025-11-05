@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Student Dashboard</title>
+</head>
+<body>
+  <h1>Student Dashboard</h1>
+
+  <p><a href="/student/lessons/">All lessons</a></p>
+  <p><a href="{% url 'my_grades' %}">My grades</a></p>
+
+  <h2>Lessons:</h2>
+  <ul>
+    {% for lesson in lessons %}
+      <li>
+        <a href="/student/lessons/{{ lesson.id }}">
+          {{ lesson.date }} — {{ lesson.name }} ({{ lesson.sclass.class_name }})
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
