@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson {{ lesson.name }}</title>
+</head>
+<body>
+<table border="1" cellpadding="6" cellspacing="0">
+  <tbody>
+      <tr id="lesson_{{ lesson.id }}">
+        <td>{{ lesson.id }}</td>
+        <td>{{ lesson.name }}</td>
+        <td>{{ lesson.description }}</td>
+        <td>{{ lesson.date }}</td>
+        <td>{{ lesson.homework }}</td>
+        <td>{{ lesson.room }}</td>
+        <td>{{ lesson.sclass.class_name }}</td>
+        <td>{{ lesson.teacher.username }}</td>
+      </tr>
+  </tbody>
+</table>
+
+{% if student is None%}
+    <form action="/teacher/lessons/{{ lesson.id }}/set_grade/" method="POST">
+        {% csrf_token %}
+        <select name="student_id" id="">
+            {% for student in students%}
+                <option value="{{ student.id }}">{{student.student.first_name}} {{ student.student.last_name }}</option>
+            {% endfor %}
+        </select>
+
+        <br><label for="Grade">Grade</label><br>
+        <input type="text" id="Grade" name="Grade" placeholder="Grade"><br>
+        <input type="submit" value="Set grade">
+
+    </form>
+{% else %}
+    <h1>My grades on this lesson:{{ grades }}</h1>
+{% endif %}
+</body>
+</html>

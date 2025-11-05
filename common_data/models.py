@@ -8,7 +8,7 @@ class SchoolClass(models.Model):
 
 class StudentClass(models.Model):
     student = ForeignKey(User, on_delete=models.CASCADE)
-    sClass = ForeignKey(SchoolClass, on_delete=models.CASCADE)
+    sclass = ForeignKey(SchoolClass, on_delete=models.CASCADE)
 
 class Lesson(models.Model):
     name = models.CharField(max_length=100)
@@ -24,4 +24,7 @@ class Grade(models.Model):
     student = ForeignKey(User, on_delete=models.CASCADE)
     lesson = ForeignKey(Lesson, on_delete=models.CASCADE)
     grade = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.student.username} — {self.lesson.name}: {self.grade}"
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons</title>
+</head>
+<body>
+    {% if student is None %}
+    <h1>Add lesson:</h1>
+        <form action="/teacher/lessons/", method="POST">
+            {% csrf_token %}
+            <label for="name">Name</label><br>
+            <input type="text" id="name" name="name" placeholder="Name"><br>
+
+            <label for="description">Description</label><br>
+            <input type="text" id="description" name="description" placeholder="Description"><br>
+
+            <label for="date">Date</label><br>
+            <input type="text" id="date" name="date" value="{{ datetime }}"><br>
+
+            <label for="homework">Homework</label><br>
+            <input type="text" id="homework" name="homework" placeholder="Homework"><br>
+
+            <label for="room">Room</label><br>
+            <input type="text" id="room" name="room" placeholder="Room"><br><br>
+
+            <select name="sclass_id" id="">
+                {% for current_class in all_classes%}
+                    <option value="{{ current_class.id }}">{{current_class.class_name}}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Add">
+        </form>
+    {% else %}
+        <h1>My lessons:</h1>
+    {% endif %}
+<table border="1" cellpadding="6" cellspacing="0">
+  <tbody>
+    {% for lesson in all_lessons %}
+      <tr id="lesson_{{ lesson.id }}">
+        <td>{{ lesson.id }}</td>
+        <td>{{ lesson.name }}</td>
+        <td>{{ lesson.description }}</td>
+        <td>{{ lesson.date }}</td>
+        <td>{{ lesson.homework }}</td>
+        <td>{{ lesson.room }}</td>
+        <td>{{ lesson.sclass.class_name }}</td>
+        <td>{{ lesson.teacher.username }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
